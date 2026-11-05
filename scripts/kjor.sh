@@ -9,7 +9,7 @@
 #  en liste i dette skriptet. Hver fil er én instans av en stack, med sin egen
 #  state-fil:
 #
-#      config/dev/network.tfvars    → stacks/network/   key oblig2/dev/network.tfstate
+#      config/dev/shared-network.tfvars → stacks/shared-network/ key oblig2/dev/shared-network.tfstate
 #      config/dev/<type>-<x>.tfvars → stacks/<type>/    key oblig2/dev/<type>-<x>.tfstate
 #
 #  Den andre linja gjelder bare når det ikke finnes en mappe som heter det
@@ -39,7 +39,7 @@
 
 set -uo pipefail
 
-LAG="network shared-network data app service"
+LAG="shared-network service"
 
 MILJO="${1:-}"
 HANDLING="${2:-}"

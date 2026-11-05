@@ -26,21 +26,3 @@ module "vnet" {
   address_space       = var.address_space
   tags                = local.tags
 }
-
-# -----------------------------------------------------------------------------
-#  Migrering: ta over ressursgruppa og VNet-et fra network-stacken.
-#  ID-ene bygges fra abonnementet Terraform er logget inn i, så ingen
-#  abonnements-ID står i koden (K5). Fjernes når begge miljøene er migrert (K8).
-# -----------------------------------------------------------------------------
-
-data "azurerm_subscription" "current" {}
-
-import {
-  to = azurerm_resource_group.this
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.rg_name}"
-}
-
-import {
-  to = module.vnet.azurerm_virtual_network.this
-  id = "${data.azurerm_subscription.current.id}/resourceGroups/${local.rg_name}/providers/Microsoft.Network/virtualNetworks/${local.vnet_name}"
-}
