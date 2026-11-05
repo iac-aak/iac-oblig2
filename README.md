@@ -1,12 +1,14 @@
-# Oblig 2 – utgangspunktet
+# Oblig 2
 
-To tjenester, `ordre` og `meny`, rullet ut i dev og prod. Infrastrukturen er
-delt **horisontalt**: én stack per lag, og hver stack dekker begge tjenestene.
+Tre tjenester, `ordre`, `meny` og `betal`, rullet ut i dev og prod. Infrastrukturen
+er delt **vertikalt**: `shared-network` eier ressursgruppa og VNet-et, og hver
+tjeneste er en egen instans av `service`.
 
 | Tjeneste | Nettverk | Data | Kjøring |
 |---|---|---|---|
 | `ordre` | subnett + NSG | storage account + Key Vault | Linux-VM med nginx og offentlig IP |
 | `meny` | subnett (delegert til App Service) + NSG | storage account + Key Vault | App Service-plan (B1) + web app med VNet-integrasjon |
+| `betal` | subnett (delegert til App Service) + NSG | storage account + Key Vault | App Service-plan (B1) + web app med VNet-integrasjon |
 
 Hva du skal gjøre med dette, står i obligteksten i Canvas.
 
@@ -37,7 +39,8 @@ ser på filene i `config/<miljø>/`. Hver fil er én instans av en stack, med si
 egen state-fil:
 
 ```text
-config/dev/network.tfvars  →  stacks/network/  →  key oblig2/dev/network.tfstate
+config/dev/shared-network.tfvars  →  stacks/shared-network/  →  key oblig2/dev/shared-network.tfstate
+config/dev/service-ordre.tfvars   →  stacks/service/         →  key oblig2/dev/service-ordre.tfstate
 ```
 
 Heter fila `<type>-<noe>.tfvars` og det ikke finnes en mappe med akkurat det
