@@ -16,9 +16,9 @@ config/
   dev/  prod/            én .tfvars per stack per miljø
 modules/                 vnet, subnet, storage, keyvault, vm, webapp
 stacks/
-  network/               ressursgruppa, VNet-et og ett subnett per tjeneste
-  data/                  storage account og Key Vault per tjeneste
-  app/                   VM-en til ordre og web app-en til meny
+  shared-network/        ressursgruppa og VNet-et
+  service/               én tjeneste: subnett, data og VM eller web app.
+                         Én instans per config/<miljø>/service-<navn>.tfvars
 shared/backend.hcl       adressen til state-kontoen (den samme som i oblig 1)
 scripts/
   kjor.sh                plan eller apply for alle stackene i ett miljø
