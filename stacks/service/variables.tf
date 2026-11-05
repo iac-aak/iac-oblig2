@@ -91,3 +91,13 @@ variable "webapp_sku" {
   type        = string
   default     = "B1"
 }
+
+variable "ekstra_regler" {
+  description = "Ekstra innkommende TCP-regler på NSG-en til tjenesten, med regelnavnet som nøkkel."
+  type = map(object({
+    port     = string
+    source   = string
+    priority = number
+  }))
+  default = {}
+}

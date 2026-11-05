@@ -39,3 +39,13 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "extra_inbound_rules" {
+  description = "Ekstra innkommende TCP-regler, med regelnavnet som nøkkel."
+  type = map(object({
+    port     = string
+    source   = string
+    priority = number
+  }))
+  default = {}
+}
